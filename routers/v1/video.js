@@ -1,25 +1,49 @@
 const video = require("../../model/video");
 const multer = require("multer");
 
+// 写文件功能
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'files')
     },
     filename: function (req, file, cb) {
-        const type = file.mimetype.split("/")[1];
+        const type = file.mimetype.match(/(?<=\/)[a-zA-Z0-9]+/);
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, file.fieldname + '-' + uniqueSuffix + `.${type}`)
     }
 })
-module.exports.upload = multer({ storage: storage });
+module.exports.upload = multer({ storage });
+
+// 文件只读功能
+const readerStorage = multer.memoryStorage();
+const fileReader = multer({ storage: readerStorage }).single("file");
+module.exports.readFile = (req, res) => {
+    fileReader(req, res, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(req.file);
+            res.send('111');
+        }
+    })
+}
 
 module.exports.test = async (req, res) => {
-    const ans = await video.create({
-        name: "好看视频",
-        createAt: Date.now(),
-        url: "http://mediaplay.kksmg.com/2022/08/11/h264_720p_600k_39725-minhangtv-20220811195700-2040-323669-600k_mp4.mp4",
-    });
-    res.send(ans);
+    console.log(`test start!`);
+    const start = Date.now();
+    try {
+        const ans = await video.create({
+            name: "好看视频",
+            createAt: Date.now(),
+            url: "http://mediaplay.kksmg.com/2022/08/11/h264_720p_600k_39725-minhangtv-20220811195700-2040-323669-600k_mp4.mp4",
+        });
+        res.send(ans);
+    } catch (e) {
+        console.log(e);
+        res.send(e)
+    } finally {
+        console.log(`test end!: ${(Date.now() - start) / 1000}`);
+    }
 }
 
 module.exports.uploadFile = async (req, res) => {
