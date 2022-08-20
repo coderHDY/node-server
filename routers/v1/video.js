@@ -16,18 +16,9 @@ module.exports.upload = multer({ storage });
 
 // 文件只读功能
 const readerStorage = multer.memoryStorage();
-const fileReader = multer({ storage: readerStorage }).single("file");
-module.exports.readFile = (req, res) => {
-    fileReader(req, res, (err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(req.file);
-            res.send('111');
-        }
-    })
-}
+module.exports.fileReader = multer({ storage: readerStorage });
 
+// 接口
 module.exports.test = async (req, res) => {
     console.log(`test start!`);
     const start = Date.now();
@@ -45,7 +36,15 @@ module.exports.test = async (req, res) => {
         console.log(`test end!: ${(Date.now() - start) / 1000}`);
     }
 }
-
+module.exports.readFile = (req, res) => {
+    try {
+        console.log(req.file)
+        delete req.file.buffer;
+        res.send(req.file);
+    } catch (err) {
+        res.send(err);
+    }
+}
 module.exports.uploadFile = async (req, res) => {
     res.send(req.file);
 }
