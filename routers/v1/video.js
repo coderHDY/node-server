@@ -36,7 +36,7 @@ module.exports.test = async (req, res) => {
         console.log(`test end!: ${(Date.now() - start) / 1000}`);
     }
 }
-module.exports.readFile = (req, res) => {
+module.exports.readFile = async (req, res) => {
     try {
         console.log(req.file)
         delete req.file.buffer;
