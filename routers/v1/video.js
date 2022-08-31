@@ -19,23 +19,24 @@ const readerStorage = multer.memoryStorage();
 module.exports.fileReader = multer({ storage: readerStorage });
 
 // 接口
-// module.exports.test = async (req, res) => {
-//     console.log(`test start!`);
-//     const start = Date.now();
-//     try {
-//         const ans = await video.create({
-//             name: "好看视频",
-//             createAt: Date.now(),
-//             url: "http://mediaplay.kksmg.com/2022/08/11/h264_720p_600k_39725-minhangtv-20220811195700-2040-323669-600k_mp4.mp4",
-//         });
-//         res.send(ans);
-//     } catch (e) {
-//         console.log(e);
-//         res.send(e)
-//     } finally {
-//         console.log(`test end!: ${(Date.now() - start) / 1000}`);
-//     }
-// }
+module.exports.test = async (req, res) => {
+    console.log(`test start!`);
+    const start = Date.now();
+    res.send(start);
+    // try {
+    //     const ans = await video.create({
+    //         name: "好看视频",
+    //         createAt: Date.now(),
+    //         url: "http://mediaplay.kksmg.com/2022/08/11/h264_720p_600k_39725-minhangtv-20220811195700-2040-323669-600k_mp4.mp4",
+    //     });
+    //     res.send(ans);
+    // } catch (e) {
+    //     console.log(e);
+    //     res.send(e)
+    // } finally {
+    //     console.log(`test end!: ${(Date.now() - start) / 1000}`);
+    // }
+}
 module.exports.readFile = async (req, res) => {
     try {
         console.log(req.file)
