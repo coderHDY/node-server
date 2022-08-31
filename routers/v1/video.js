@@ -21,11 +21,11 @@ module.exports.fileReader = multer({ storage: readerStorage });
 // 接口
 module.exports.test = async (req, res) => {
     console.log(`test start!`);
-    const start = Date.now();
+    const start = +Date.now();
     try {
-        res.send(start);
+        res.send({ start });
     } catch (e) {
-        res.send(e);
+        res.send({ e });
     }
     // try {
     //     const ans = await video.create({
