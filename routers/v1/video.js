@@ -22,7 +22,11 @@ module.exports.fileReader = multer({ storage: readerStorage });
 module.exports.test = async (req, res) => {
     console.log(`test start!`);
     const start = Date.now();
-    res.send(start);
+    try {
+        res.send(start);
+    } catch (e) {
+        res.send(e);
+    }
     // try {
     //     const ans = await video.create({
     //         name: "好看视频",
