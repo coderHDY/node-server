@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/robot/:val", async (req, res) => {
+    const { val } = req.params;
     try {
-        const { val } = req.params;
         const msg = await (await fetch(`http://api.qingyunke.com/api.php?key=free&appid=0&msg=${val}`)).json();
         res.send(msg);
     } catch (e) {
