@@ -7,7 +7,7 @@ router.get("/robot/:val", async (req, res) => {
         const msg = await (await fetch(`http://api.qingyunke.com/api.php?key=free&appid=0&msg=${val}`)).json();
         res.send(msg);
     } catch (e) {
-        res.send({ err });
+        res.send({ e });
     }
 });
 
