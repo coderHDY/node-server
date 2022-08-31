@@ -1,4 +1,6 @@
 // const video = require("../../model/video");
+const express = require("express");
+const router = express.Router();
 const multer = require("multer");
 
 // 写文件功能
@@ -12,14 +14,14 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + uniqueSuffix + `.${type}`)
     }
 })
-module.exports.upload = multer({ storage });
+const upload = multer({ storage });
 
 // 文件只读功能
 const readerStorage = multer.memoryStorage();
-module.exports.fileReader = multer({ storage: readerStorage });
+const fileReader = multer({ storage: readerStorage });
 
 // 接口
-module.exports.test = async (req, res) => {
+const test = async (req, res) => {
     console.log(`test start!`);
     const start = +Date.now();
     try {
@@ -41,7 +43,7 @@ module.exports.test = async (req, res) => {
     //     console.log(`test end!: ${(Date.now() - start) / 1000}`);
     // }
 }
-module.exports.readFile = async (req, res) => {
+const readFile = async (req, res) => {
     try {
         console.log(req.file)
         delete req.file.buffer;
@@ -50,10 +52,27 @@ module.exports.readFile = async (req, res) => {
         res.send(err);
     }
 }
-module.exports.uploadFile = async (req, res) => {
+const uploadFile = async (req, res) => {
     res.send(req.file);
 }
-module.exports.postTest = async (req, res, next) => {
+const postTest = async (req, res, next) => {
     console.log("test: ", req.body);
     res.send("post接收到了！");
+}
+
+router.get("/", async (req, res) => {
+    try {
+        console.log("api get /video")
+        res.send({ msg: "video suggess" });
+    } catch (err) {
+        res.send({ err });
+    }
+});
+router.post("/uploadFile", upload.single("file"), uploadFile);
+router.post("/readFile", fileReader.single("file"), readFile);
+router.post("/postTest", postTest);
+
+module.exports = {
+    video: router,
+    test,
 }
