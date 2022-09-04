@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "host": "node ./index.js --host 192.168.31.237",
     "server": "node ./index.js",
     "start": "pm2 start npm -- run server --name server"
   },
@@ -13,6 +14,7 @@
     "express": "^4.18.1",
     "mongoose": "^6.5.2",
     "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.7",
     "pm2": "^5.2.0",
     "serve-static": "^1.15.0"
   }
