@@ -1,4 +1,4 @@
-const port = 80;
+const port = 8080;
 const app = new require("express")();
 const usePlugin = require("./utils/index.js");
 const useRouter = require("./routers/v1/index.js");
