@@ -33,3 +33,11 @@ npm run server
 
 </body>
 ```
+## 更新流程
+1. 推代码
+2. ssh去服务器
+    ```shell
+    lsof -i:8080
+    kill -9 xxxx
+    ```
+3. 宝塔重启服务
