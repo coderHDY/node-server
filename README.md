@@ -1,6 +1,6 @@
 ## 上传文件api
 ```text
-api: localhost:8080/api/uploadFile   
+api: localhost:8070/api/uploadFile   
 method: post  
 body: {  
     type: formData  
@@ -22,12 +22,12 @@ npm run server
           if (fileInput.files.length < 0) console.wran('请选择文件再上传！');
           const formData = new FormData();
           formData.append("file", fileInput.files[0]);
-          const { filename } = await fetch('http://127.0.0.1:8080/api/uploadFile', {
+          const { filename } = await fetch('http://127.0.0.1:8070/api/uploadFile', {
               method: "POST",
               body: formData,
           }).then(res => res.json());
           console.log(filename);
-          img.setAttribute("src", `http://127.0.0.1:8080/files/${filename}`);
+          img.setAttribute("src", `http://127.0.0.1:8070/files/${filename}`);
       })
   </script>
 
@@ -37,7 +37,7 @@ npm run server
 1. 推代码
 2. ssh去服务器
     ```shell
-    lsof -i:8080
+    lsof -i:8070
     kill -9 xxxx
     ```
 3. 宝塔重启服务
