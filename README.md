@@ -41,3 +41,8 @@ npm run server
     kill -9 xxxx
     ```
 3. 宝塔重启服务
+---
+* 新
+```shell
+pm2 restart all
+```
