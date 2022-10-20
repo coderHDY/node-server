@@ -35,14 +35,8 @@ npm run server
 ```
 ## 更新流程
 1. 推代码
-2. ssh去服务器
-```shell
-lsof -i:8070
-kill -9 xxxx
-```
-3. 宝塔重启服务
 ---
-* 新
+2. 登服务器
 ```shell
 cd /home/app/hdy.gh520.xyz
 git pull

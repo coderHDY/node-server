@@ -12,7 +12,8 @@ router.ws("/", (wsInstance, req) => {
 })
 router.get("/msg", (req, res) => {
     const { m } = req.query;
-    if (!ws || !m) return res.send({ "done": false })
+    if (!ws || !m) return res.send({ "done": false });
     ws.send(m);
+    res.send({ "done": true });
 })
 module.exports = router;
