@@ -3,17 +3,19 @@ require("express-ws")(express());
 const router = express.Router();
 
 let ws;
-router.ws("/", (wsInstance, req) => {
+router.ws("/screen", (wsInstance, req) => {
     ws = wsInstance;
     ws.on('message', function (msg) {
-        console.log(msg);
         ws.send(msg);
     });
 })
-router.get("/msg", (req, res) => {
-    const { m } = req.query;
-    if (!ws || !m) return res.send({ "done": false });
-    ws.send(m);
+router.post("/msg", (req, res) => {
+    const msg = req.body;
+    if (!ws) {
+        return res.send({ "done": false });
+    }
+    ws.send(JSON.stringify(msg));
     res.send({ "done": true });
 })
+
 module.exports = router;
