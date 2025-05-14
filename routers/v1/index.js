@@ -5,13 +5,13 @@ const { video } = require("./video");
 const { test } = require("./test");
 const api = require("./api");
 const ws = require("./ws");
-const ghql = require("./ghql");
+const { tweeter } = require("./tweeter");
 
 module.exports = (app) => {
-    app.use("/test", test);
-    app.use("/files", express.static(path.join(__dirname, "../../files")));
-    app.use("/api", api);
-    app.use("/video", video);
-    app.use("/ws", ws);
-    app.use("/ghql", ghql);
-}
+  app.use("/test", test);
+  app.use("/files", express.static(path.join(__dirname, "../../files")));
+  app.use("/api", api);
+  app.use("/video", video);
+  app.use("/ws", ws);
+  app.use("/tweeter", tweeter);
+};
