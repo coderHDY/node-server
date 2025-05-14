@@ -64,7 +64,7 @@ router.post("/save-prompt", async (req, res) => {
     console.log("📩 收到推文：", { text, url, createdAt, images });
 
     res.json({
-      message: "推文接收成功",
+      message: "✅ 推文接收成功",
       data: {
         text,
         url,
